@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Alpine-data-API.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+<style>
+    body {
+            background-color: whitesmoke;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        
+        }
+        .pizzas{
+            background-color: pink;
+            border-radius: 1em;
+        }
+        .pizza {
+            border: 1px solid;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 1em;
+            margin: 5px;
+        }
+       
+        .align{
+            text-align: center;
+            border-radius: 1em;
+            background-color: goldenrod;
+            padding: 10px;
+            
+        }
+        .cart{
+    background-color: lightgray;
+    border: 0.2em;
+    border-radius: 0.5em;
+    
+
+    
+    padding-left: 40%;
+    margin-bottom: 0.5em;
+        }
+        .list{
+    background-color: lightgray;
+    border: 0.2em;
+    border-radius: 0.5em;
+    
+    margin: 0.5em;
+    padding: 1em;
+    
+            
+        }
+@media(min-width: 600px){
+            .pizzas {
+            display: flex;
+            }
+        }
+        table, td, th {
+  border: 1px;
+}
+.allPizzas{
+    border: 1px solid;
+            padding: 10px;
+            margin-bottom: 5px;
+           
+
+}
+
+.featpizza{
+
+    padding: 1em;
+    background-color: lightgray;
+    border: 0.2em;
+    border-radius: 0.5em;
+    margin: 1em;
+    
+    
+   
+}
+.features{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+ <h1 style="text-align:center" > Pizza Perfect </h1>
+ <div style="padding-left: 650px;"> <img src="https://previews.123rf.com/images/larryrains/larryrains1902/larryrains190200004/118556770-pizza-pie-a-vector-cartoon-illustration-of-a-restaurant-pizza-pie-.jpg" alt="" width="50px" height="50px"  ></div>
+ <small> <h6 style="text-align:center">pizza orders</h6></small>
+    <div x-data="pizzaCartWithAPIWidget" >
+
+
+        <div>
+            Who is buying the pizzas:<input type="text" x-model="username"> 
+
+        </div>
+       
+<div class="cart" x-show="paye" x-transition >
+    <h3>Shopping cart</h3>
+
+    <table>
+        <tr>
+            <th>size</th>
+            <th>qty</th>
+            <th></th>
+            <th></th>
+            <th>total</th>
+        </tr>
+        <template x-for="pizza in cart.pizzas"> 
+
+            <tr>
+                <td> <strong x-text="pizza.size"></strong></td>
+                <td><span x-text="pizza.qty"></span></td>
+             
+                <td> <button @click="add(pizza); paye = true">+</button> </td>
+                <td> <button @click="remove(pizza)">-</button> </td>
+                <td><span>R</span></td>
+                <td x-text="pizza.total"></td>
+                </tr>
+
+        </template>
+
+
+        <tr>
+            <td> <strong> Cart Total:</strong></td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <b><strong> <td><span>R</span></td></strong></b>
+         <b> <strong> <td  x-text="cart.total" ></td></strong></b>
+            </tr>
+    </table>
+    <div>
+<br>
+
+    </div>
+<div x-show="removeCheckout">
+    <button @click="showCheckout = true; removeCheckout=false"><strong> checkOut </strong>></button>
+</div>
+
+    <div class="checkOut" x-show="showCheckout">
+    <b><div x-text="paymentStatus"></div></b>
+    Enter Amount: <input type="number" x-model="paymentAmount"> <br>
+    <button @click="pay()" style=" width:9%; height:50%;"> <strong>Pay</strong>  </button>
+    </div>
+
+</div>
+
+
+<h3>Featured pizza(s)<h3>
+<div class="features">
+    <template x-for="pizza in featured.pizzas" > 
+      <div class="featpizza">
+        
+      <div>
+        <b x-text="pizza.flavour" > </b> 
+      </div>
+
+     <img src="http://entiremart.com/images/sellerimages/image1/1615197890.png" alt="" height="80px" width="80px">  </td>
+    <div x-text="pizza.size"> </div> 
+    <div>
+        R<span x-text="pizza.price"></span>
+    </div>
+     <button @click="add(pizza);paye = true" style=" width:90%; height:60%; "><b>Buy</b></button> 
+    
+     </div>  
+     </template>
+    </div>
+
+
+
+<div class="list">
+            
+        <table style="width:60%; ">
+            
+  <template x-for="pizza in pizzas">
+
+    
+    <tr  >
+   <td>  <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="" width="80px" height="80px"> </td>
+        <td  x-text="pizza.flavour"> </td>
+        <td x-text="pizza.size"> </td>
+        <td> R<span x-text="pizza.price"></span> </td> 
+        <td> <button @click="add(pizza); paye = true" style=" width:140%; height: 50%;"><b>Buy</b></button> </td>
+    
+</tr>
+
+    </template>
+</div>
+    
+
+</table>
+</div>
+    
+</body>
+</html>
