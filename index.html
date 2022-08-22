@@ -89,7 +89,7 @@
   align-items: center;
 }
 </style>
- <h1 style="text-align:center" > Pizza Perfect </h1>
+ <h1 style="text-align:center; background-color: lightgray" > Pizza Perfect </h1>
  <div style="padding-left: 650px;"> <img src="https://previews.123rf.com/images/larryrains/larryrains1902/larryrains190200004/118556770-pizza-pie-a-vector-cartoon-illustration-of-a-restaurant-pizza-pie-.jpg" alt="" width="50px" height="50px"  ></div>
  <small> <h6 style="text-align:center">pizza orders</h6></small>
     <div x-data="pizzaCartWithAPIWidget" >
@@ -139,11 +139,11 @@
 <br>
 
     </div>
-<div x-show="removeCheckout">
+<div x-show="removeCheckout" x-transition>
     <button @click="showCheckout = true; removeCheckout=false"><strong> checkOut </strong>></button>
 </div>
 
-    <div class="checkOut" x-show="showCheckout">
+    <div class="checkOut" x-show="showCheckout" x-transition>
     <b><div x-text="paymentStatus"></div></b>
     Enter Amount: <input type="number" x-model="paymentAmount"> <br>
     <button @click="pay()" style=" width:9%; height:50%;"> <strong>Pay</strong>  </button>
@@ -161,7 +161,7 @@
         <b x-text="pizza.flavour" > </b> 
       </div>
 
-     <img src="http://entiremart.com/images/sellerimages/image1/1615197890.png" alt="" height="80px" width="80px">  </td>
+     <img src="https://media.istockphoto.com/photos/delicious-vegetarian-pizza-on-white-picture-id1192094401?k=20&m=1192094401&s=612x612&w=0&h=jesvXuPyvqM36GQ5QEvJrL3QZjK6YKsziUUF3ZbW0gw=" alt="" height="80px" width="80px">  </td>
     <div x-text="pizza.size"> </div> 
     <div>
         R<span x-text="pizza.price"></span>
