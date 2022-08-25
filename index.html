@@ -39,6 +39,7 @@
     background-color: lightgray;
     border: 0.2em;
     border-radius: 0.5em;
+    box-sizing: content-box;
     
 
     
@@ -52,8 +53,11 @@
     
     margin: 0.5em;
     padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
-            
+ 
         }
 @media(min-width: 600px){
             .pizzas {
@@ -89,11 +93,14 @@
   align-items: center;
 }
 </style>
- <h1 style="text-align:center; background-color: lightgray" > Pizza Perfect </h1>
+ <h1 style="text-align:center; background-color: lightgray; border-radius: 0.5em" > Pizza Perfect </h1>
  <div style="padding-left: 650px;"> <img src="https://previews.123rf.com/images/larryrains/larryrains1902/larryrains190200004/118556770-pizza-pie-a-vector-cartoon-illustration-of-a-restaurant-pizza-pie-.jpg" alt="" width="50px" height="50px"  ></div>
  <small> <h6 style="text-align:center">pizza orders</h6></small>
     <div x-data="pizzaCartWithAPIWidget" >
+      
 
+
+         Cart Code: <input type="text" x-model="cartId">
 
         <div>
             Who is buying the pizzas:<input type="text" x-model="username"> 
@@ -152,7 +159,7 @@
 </div>
 
 
-<h3>Featured pizza(s)<h3>
+
 <div class="features">
     <template x-for="pizza in featured.pizzas" > 
       <div class="featpizza">

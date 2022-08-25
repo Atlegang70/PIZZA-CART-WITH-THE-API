@@ -110,7 +110,7 @@ document.addEventListener('alpine:init', () => {
         .post('https://pizza-cart-api.herokuapp.com/api/pizza-cart/pay', cartcode)
         .then(()=>{
 
-         if(this.paymentAmount > this.cart.total){
+         if(this.paymentAmount > this.cart.total.toFixed(2)){
          this.paymentStatus="paid"
         
          setTimeout(()=>{
